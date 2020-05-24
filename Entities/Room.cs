@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Codacious.GraphQL.Entities
 {
@@ -17,18 +16,18 @@ namespace Codacious.GraphQL.Entities
         [Required]
         public RoomStatus Status { get; set; }
 
-        public bool AllowedSmoking { get; set; }
+        public bool HasWifi { get; set; }
 
         public Room()
         {
 
         }
-        public Room(int number, string name, RoomStatus status, bool allowedSmoking)
+        public Room(int number, string name, RoomStatus status, bool hasWifi)
         {
             Number = number;
             Name = name;
             Status = status;
-            AllowedSmoking = allowedSmoking;
+            HasWifi = hasWifi;
         }
     }
 }

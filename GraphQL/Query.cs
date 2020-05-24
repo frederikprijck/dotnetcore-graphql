@@ -36,7 +36,7 @@ namespace Codacious.GraphQL.GraphQL
                 {
                     new QueryArgument<BooleanGraphType>
                     {
-                        Name = "allowedSmoking"
+                        Name = "wifi"
                     },
                     new QueryArgument<BooleanGraphType>
                     {
@@ -46,12 +46,12 @@ namespace Codacious.GraphQL.GraphQL
                resolve: context =>
                {
                    var query = roomRepository.GetQuery();
-                   var allowedSmoking = context.GetArgument<bool?>("allowedSmoking");
+                   var hasWifi = context.GetArgument<bool?>("wifi");
                    var available = context.GetArgument<bool?>("available");
 
-                   if (allowedSmoking.HasValue)
+                   if (hasWifi.HasValue)
                    {
-                       query = query.Where(r => r.AllowedSmoking == allowedSmoking.Value);
+                       query = query.Where(r => r.HasWifi == hasWifi.Value);
                    }
 
                    if (available.HasValue)

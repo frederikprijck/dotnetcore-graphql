@@ -30,7 +30,7 @@ namespace Codacious.GraphQL.Migrations
                     Number = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: true),
                     Status = table.Column<int>(nullable: false),
-                    AllowedSmoking = table.Column<bool>(nullable: false)
+                    HasWifi = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,32 +70,32 @@ namespace Codacious.GraphQL.Migrations
                 columns: new[] { "Id", "Name", "RegisterDate" },
                 values: new object[,]
                 {
-                    { 1, "Alper Ebicoglu", new DateTime(2020, 5, 15, 0, 16, 21, 613, DateTimeKind.Local).AddTicks(3274) },
-                    { 2, "George Michael", new DateTime(2020, 5, 20, 0, 16, 21, 617, DateTimeKind.Local).AddTicks(9109) },
-                    { 3, "Daft Punk", new DateTime(2020, 5, 24, 0, 16, 21, 617, DateTimeKind.Local).AddTicks(9266) }
+                    { 1, "Alper Ebicoglu", new DateTime(2020, 5, 15, 1, 15, 53, 845, DateTimeKind.Local).AddTicks(3489) },
+                    { 2, "George Michael", new DateTime(2020, 5, 20, 1, 15, 53, 849, DateTimeKind.Local).AddTicks(8561) },
+                    { 3, "Daft Punk", new DateTime(2020, 5, 24, 1, 15, 53, 849, DateTimeKind.Local).AddTicks(8754) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Rooms",
-                columns: new[] { "Id", "AllowedSmoking", "Name", "Number", "Status" },
+                columns: new[] { "Id", "HasWifi", "Name", "Number", "Status" },
                 values: new object[,]
                 {
                     { 1, false, "yellow-room", 101, 1 },
                     { 2, false, "blue-room", 102, 1 },
                     { 3, false, "white-room", 103, 0 },
                     { 4, false, "black-room", 104, 0 },
-                    { 5, true, "foggy-room", 105, 1 }
+                    { 5, true, "wifi-room", 105, 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Reservations",
                 columns: new[] { "Id", "CheckinDate", "CheckoutDate", "GuestId", "RoomId" },
-                values: new object[] { 1, new DateTime(2020, 5, 23, 0, 16, 21, 618, DateTimeKind.Local).AddTicks(2559), new DateTime(2020, 5, 28, 0, 16, 21, 618, DateTimeKind.Local).AddTicks(2576), 1, 3 });
+                values: new object[] { 1, new DateTime(2020, 5, 23, 1, 15, 53, 850, DateTimeKind.Local).AddTicks(2459), new DateTime(2020, 5, 28, 1, 15, 53, 850, DateTimeKind.Local).AddTicks(2478), 1, 3 });
 
             migrationBuilder.InsertData(
                 table: "Reservations",
                 columns: new[] { "Id", "CheckinDate", "CheckoutDate", "GuestId", "RoomId" },
-                values: new object[] { 2, new DateTime(2020, 5, 24, 0, 16, 21, 618, DateTimeKind.Local).AddTicks(5876), new DateTime(2020, 5, 29, 0, 16, 21, 618, DateTimeKind.Local).AddTicks(5894), 2, 4 });
+                values: new object[] { 2, new DateTime(2020, 5, 24, 1, 15, 53, 850, DateTimeKind.Local).AddTicks(5720), new DateTime(2020, 5, 29, 1, 15, 53, 850, DateTimeKind.Local).AddTicks(5738), 2, 4 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_GuestId",

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using System.Linq;
 using Codacious.GraphQL.Context;
 using Codacious.GraphQL.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -11,12 +8,10 @@ namespace Codacious.GraphQL.Repositories
     public class ReservationRepository
     {
         private readonly HotelDbContext _hotelDbContext;
-        private readonly MapperConfiguration _config;
 
-        public ReservationRepository(HotelDbContext hotelDbContext, MapperConfiguration config)
+        public ReservationRepository(HotelDbContext hotelDbContext)
         {
             _hotelDbContext = hotelDbContext;
-            _config = config;
         }
 
         public IQueryable<Reservation> GetQuery()

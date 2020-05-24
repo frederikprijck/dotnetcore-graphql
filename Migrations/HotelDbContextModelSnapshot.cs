@@ -43,19 +43,19 @@ namespace Codacious.GraphQL.Migrations
                         {
                             Id = 1,
                             Name = "Alper Ebicoglu",
-                            RegisterDate = new DateTime(2020, 5, 15, 0, 16, 21, 613, DateTimeKind.Local).AddTicks(3274)
+                            RegisterDate = new DateTime(2020, 5, 15, 1, 15, 53, 845, DateTimeKind.Local).AddTicks(3489)
                         },
                         new
                         {
                             Id = 2,
                             Name = "George Michael",
-                            RegisterDate = new DateTime(2020, 5, 20, 0, 16, 21, 617, DateTimeKind.Local).AddTicks(9109)
+                            RegisterDate = new DateTime(2020, 5, 20, 1, 15, 53, 849, DateTimeKind.Local).AddTicks(8561)
                         },
                         new
                         {
                             Id = 3,
                             Name = "Daft Punk",
-                            RegisterDate = new DateTime(2020, 5, 24, 0, 16, 21, 617, DateTimeKind.Local).AddTicks(9266)
+                            RegisterDate = new DateTime(2020, 5, 24, 1, 15, 53, 849, DateTimeKind.Local).AddTicks(8754)
                         });
                 });
 
@@ -90,16 +90,16 @@ namespace Codacious.GraphQL.Migrations
                         new
                         {
                             Id = 1,
-                            CheckinDate = new DateTime(2020, 5, 23, 0, 16, 21, 618, DateTimeKind.Local).AddTicks(2559),
-                            CheckoutDate = new DateTime(2020, 5, 28, 0, 16, 21, 618, DateTimeKind.Local).AddTicks(2576),
+                            CheckinDate = new DateTime(2020, 5, 23, 1, 15, 53, 850, DateTimeKind.Local).AddTicks(2459),
+                            CheckoutDate = new DateTime(2020, 5, 28, 1, 15, 53, 850, DateTimeKind.Local).AddTicks(2478),
                             GuestId = 1,
                             RoomId = 3
                         },
                         new
                         {
                             Id = 2,
-                            CheckinDate = new DateTime(2020, 5, 24, 0, 16, 21, 618, DateTimeKind.Local).AddTicks(5876),
-                            CheckoutDate = new DateTime(2020, 5, 29, 0, 16, 21, 618, DateTimeKind.Local).AddTicks(5894),
+                            CheckinDate = new DateTime(2020, 5, 24, 1, 15, 53, 850, DateTimeKind.Local).AddTicks(5720),
+                            CheckoutDate = new DateTime(2020, 5, 29, 1, 15, 53, 850, DateTimeKind.Local).AddTicks(5738),
                             GuestId = 2,
                             RoomId = 4
                         });
@@ -112,7 +112,7 @@ namespace Codacious.GraphQL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("AllowedSmoking")
+                    b.Property<bool>("HasWifi")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -133,7 +133,7 @@ namespace Codacious.GraphQL.Migrations
                         new
                         {
                             Id = 1,
-                            AllowedSmoking = false,
+                            HasWifi = false,
                             Name = "yellow-room",
                             Number = 101,
                             Status = 1
@@ -141,7 +141,7 @@ namespace Codacious.GraphQL.Migrations
                         new
                         {
                             Id = 2,
-                            AllowedSmoking = false,
+                            HasWifi = false,
                             Name = "blue-room",
                             Number = 102,
                             Status = 1
@@ -149,7 +149,7 @@ namespace Codacious.GraphQL.Migrations
                         new
                         {
                             Id = 3,
-                            AllowedSmoking = false,
+                            HasWifi = false,
                             Name = "white-room",
                             Number = 103,
                             Status = 0
@@ -157,7 +157,7 @@ namespace Codacious.GraphQL.Migrations
                         new
                         {
                             Id = 4,
-                            AllowedSmoking = false,
+                            HasWifi = false,
                             Name = "black-room",
                             Number = 104,
                             Status = 0
@@ -165,8 +165,8 @@ namespace Codacious.GraphQL.Migrations
                         new
                         {
                             Id = 5,
-                            AllowedSmoking = true,
-                            Name = "foggy-room",
+                            HasWifi = true,
+                            Name = "wifi-room",
                             Number = 105,
                             Status = 1
                         });

@@ -33,7 +33,7 @@ namespace Codacious.GraphQL.GraphQL
             Field(x => x.Id);
             Field(x => x.Name);
             Field(x => x.Number);
-            Field(x => x.AllowedSmoking);
+            Field(x => x.HasWifi);
             Field<RoomStatusType>(nameof(Room.Status));
         }
     }

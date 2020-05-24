@@ -13,16 +13,16 @@ query AllRooms {
     id
     name
     status
-    allowedSmoking
+    hasWifi
   }
 }
 
-query SmokingRooms {
-  searchRooms(allowedSmoking: true) {
+query WifiRooms {
+  searchRooms(wifi: true) {
     id
     name
     status
-    allowedSmoking
+    hasWifi
   }
 }
 
@@ -31,16 +31,16 @@ query AvailableRooms {
     id
     name
     status
-    allowedSmoking
+    hasWifi
   }
 }
 
-query AvailableSmokingRooms {
-  searchRooms(available: true allowedSmoking: true) {
+query AvailableWifiRooms {
+  searchRooms(available: true wifi: true) {
     id
     name
     status
-    allowedSmoking
+    hasWifi
   }
 }
 
@@ -49,7 +49,7 @@ query SpecificRoom {
     id
     name
     status
-    allowedSmoking
+    hasWifi
   }
 }
 
