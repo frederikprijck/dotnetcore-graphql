@@ -1,11 +1,11 @@
-Example application for using GraphQL with ASP.NET Core.
+# Example application for using GraphQL with ASP.NET Core.
 
-# Running locally
+## Running locally
 - Restore the Nuget Packages
 - Update the Database to the latest migrations by executing `Update-Database` from the `Package Manager Console`
 - Run the application, it should open on `ui/playground`
 
-# Queries
+## Queries
 The following queries are available:
 ```
 query AllRooms {
@@ -66,7 +66,7 @@ query ListReservations {
 
 ```
 
-# Mutations
+## Mutations
 Apart form queries, there are also a few mutations available
 ```
 mutation CreateReservation {
