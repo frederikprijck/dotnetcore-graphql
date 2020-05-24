@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Codacious.GraphQL.Context;
 using Codacious.GraphQL.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -20,16 +19,6 @@ namespace Codacious.GraphQL.Repositories
             _config = config;
         }
 
-        public async Task<List<T>> GetAll<T>()
-        {
-            return await _hotelDbContext
-                .Reservations
-                .Include(x => x.Room)
-                .Include(x => x.Guest)
-                .ProjectTo<T>(_config)
-                .ToListAsync();
-        }
-
         public IQueryable<Reservation> GetQuery()
         {
             return _hotelDbContext
@@ -38,13 +27,20 @@ namespace Codacious.GraphQL.Repositories
                 .Include(x => x.Guest);
         }
 
-        public async Task<IEnumerable<Reservation>> GetAll()
+
+        public Reservation Add(Reservation reservation)
         {
-            return await _hotelDbContext
-                .Reservations
-                .Include(x => x.Room)
-                .Include(x => x.Guest)
-                .ToListAsync();
+            var added = _hotelDbContext.Reservations.Add(reservation);
+            _hotelDbContext.SaveChanges();
+            return added.Entity;
+        }
+
+        public Reservation Remove(int id)
+        {
+            var reservation = _hotelDbContext.Reservations.SingleOrDefault(reservation => reservation.Id == id);
+            _hotelDbContext.Reservations.Remove(reservation);
+            _hotelDbContext.SaveChanges();
+            return reservation;
         }
     }
 }

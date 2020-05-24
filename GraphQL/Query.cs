@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using Codacious.GraphQL.Repositories;
 using GraphQL.Types;
@@ -9,72 +8,82 @@ namespace Codacious.GraphQL.GraphQL
 {
     public class HotelQuery : ObjectGraphType
     {
-        public HotelQuery(ReservationRepository reservationRepository)
+        public HotelQuery(GuestRepository guestRepository, ReservationRepository reservationRepository, RoomRepository roomRepository)
         {
-            Field<ListGraphType<ReservationType>>("reservations",
+            Field<ListGraphType<RoomType>>("listGuests",
+                resolve: context =>
+                {
+                    return guestRepository.GetQuery().ToList();
+                }
+            );
+
+            Field<ListGraphType<ReservationType>>("listReservations",
+                resolve: context =>
+                {
+                    return reservationRepository.GetQuery().ToList();
+                }
+            );
+
+            Field<ListGraphType<RoomType>>("listRooms",
+                resolve: context =>
+                {
+                    return roomRepository.GetQuery().ToList();
+                }
+            );
+
+            Field<ListGraphType<RoomType>>("searchRooms",
                 arguments: new QueryArguments(new List<QueryArgument>
                 {
-                    new QueryArgument<IdGraphType>
+                    new QueryArgument<BooleanGraphType>
                     {
-                        Name = "id"
-                    },
-                    new QueryArgument<DateGraphType>
-                    {
-                        Name = "checkinDate"
-                    },
-                    new QueryArgument<DateGraphType>
-                    {
-                        Name = "checkoutDate"
+                        Name = "allowedSmoking"
                     },
                     new QueryArgument<BooleanGraphType>
                     {
-                        Name = "roomAllowedSmoking"
+                        Name = "available"
                     },
-                    new QueryArgument<RoomStatusType>
-                    {
-                        Name = "roomStatus"
-                    }
                 }),
-                resolve: context =>
+               resolve: context =>
+               {
+                   var query = roomRepository.GetQuery();
+                   var allowedSmoking = context.GetArgument<bool?>("allowedSmoking");
+                   var available = context.GetArgument<bool?>("available");
+
+                   if (allowedSmoking.HasValue)
+                   {
+                       query = query.Where(r => r.AllowedSmoking == allowedSmoking.Value);
+                   }
+
+                   if (available.HasValue)
+                   {
+                       query = query.Where(r => r.Status == (available.Value ? RoomStatus.Available : RoomStatus.Unavailable));
+                   }
+
+                   return query.ToList();
+               }
+           );
+
+            Field<RoomType>("getRoom",
+                arguments: new QueryArguments(new List<QueryArgument>
                 {
-                    var query = reservationRepository.GetQuery();
-
-                    var reservationId = context.GetArgument<int?>("id");
-                    if (reservationId.HasValue)
+                    new QueryArgument<IntGraphType>
                     {
-                        return reservationRepository.GetQuery().Where(r => r.Id == reservationId.Value);
-                    }
+                        Name = "id"
+                    },
+                }),
+               resolve: context =>
+               {
+                   var query = roomRepository.GetQuery();
+                   var id = context.GetArgument<int?>("id");
 
-                    var checkinDate = context.GetArgument<DateTime?>("checkinDate");
-                    if (checkinDate.HasValue)
-                    {
-                        return reservationRepository.GetQuery()
-                            .Where(r => r.CheckinDate.Date == checkinDate.Value.Date);
-                    }
+                   if (id.HasValue)
+                   {
+                       return query.SingleOrDefault(r => r.Id == id.Value);
+                   }
 
-                    var checkoutDate = context.GetArgument<DateTime?>("checkoutDate");
-                    if (checkoutDate.HasValue)
-                    {
-                        return reservationRepository.GetQuery()
-                            .Where(r => r.CheckoutDate.Date >= checkoutDate.Value.Date);
-                    }
-
-                    var allowedSmoking = context.GetArgument<bool?>("roomAllowedSmoking");
-                    if (allowedSmoking.HasValue)
-                    {
-                        return reservationRepository.GetQuery()
-                            .Where(r => r.Room.AllowedSmoking == allowedSmoking.Value);
-                    }
-
-                    var roomStatus = context.GetArgument<RoomStatus?>("roomStatus");
-                    if (roomStatus.HasValue)
-                    {
-                        return reservationRepository.GetQuery().Where(r => r.Room.Status == roomStatus.Value);
-                    }
-
-                    return query.ToList();
-                }
-            );
+                   return null;
+               }
+           );
 
         }
     }

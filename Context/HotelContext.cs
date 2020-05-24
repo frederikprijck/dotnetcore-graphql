@@ -6,7 +6,7 @@ namespace Codacious.GraphQL.Context
 {
     public class HotelDbContext : DbContext
     {
-        public static string DbConnectionString = "Server=localhost; Database=MyHotelDb; Trusted_Connection=True;";
+        public static string DbConnectionString = "server=(localdb)\\MSSQLLocalDB; database=HotelDb; Trusted_Connection=True;";
 
         public HotelDbContext(DbContextOptions<HotelDbContext> options)
             : base(options)
@@ -30,6 +30,7 @@ namespace Codacious.GraphQL.Context
             modelBuilder.Entity<Room>().HasData(new Room(102, "blue-room", RoomStatus.Available, false) { Id = 2 });
             modelBuilder.Entity<Room>().HasData(new Room(103, "white-room", RoomStatus.Unavailable, false) { Id = 3 });
             modelBuilder.Entity<Room>().HasData(new Room(104, "black-room", RoomStatus.Unavailable, false) { Id = 4 });
+            modelBuilder.Entity<Room>().HasData(new Room(105, "foggy-room", RoomStatus.Available, true) { Id = 5 });
 
             //RESERVATIONS
             modelBuilder.Entity<Reservation>().HasData(new Reservation(DateTime.Now.AddDays(-2), DateTime.Now.AddDays(3), 3, 1) { Id = 1 });
