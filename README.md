@@ -1,5 +1,5 @@
 # Example application for using GraphQL with ASP.NET Core.
-
+![](https://github.com/frederikprijck/dotnetcore-graphql/workflows/Build/badge.svg)
 ## Running locally
 - Restore the Nuget Packages
 - Update the Database to the latest migrations by executing `Update-Database` from the `Package Manager Console`
